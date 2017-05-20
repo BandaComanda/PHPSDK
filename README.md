@@ -49,7 +49,7 @@ $response = $client->query($order, $items);
 4. В случае успеха - объект Response будет содержать токен и идентификатор открытой сессии, которые можно извлечь следующим образом:
 ```php
 
-if (!$response->isError) {
+if (!$response->isError()) {
    $token   = $response->getData()[ 'data' ][ 'response' ][ 'token' ];
    $session = $response->getData()[ 'data' ][ 'response' ][ 'id' ];
 }
