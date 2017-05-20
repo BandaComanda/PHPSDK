@@ -53,5 +53,6 @@ if (!$response->isError()) {
    $token   = $response->getData()[ 'data' ][ 'response' ][ 'token' ];
    $session = $response->getData()[ 'data' ][ 'response' ][ 'id' ];
 }
+```
 
 См. описание запроса с определением списка обязательных и опциональных полей http://docs.nostromo.in/mutation.html (Mutation.createSession)
