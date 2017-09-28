@@ -23,27 +23,30 @@ class MercuryClient
      */
     private $client;
 
+    const ENDPOINT_URL = 'https://gql.mercurypos.online/gql';
 
     /**
      * MercuryClient constructor.
      *
-     * @param string $url Endpoint URL.
      * @param string $token JWT token.
      */
-    public function __construct($url, $token)
+    public function __construct($token)
     {
-        $this->url     = $url;
+        $this->url     = self::ENDPOINT_URL;
         $this->token   = $token;
-        $this->client = new CurlClient($url, $token);
+        $this->client = new CurlClient($this->url, $token);
     }
 
 
     /**
      * @param array $order
      * @param array $items
+     * @param string $address
+     * @param string $phone
+     *
      * @return Response
      */
-    public function createSession($order, $items)
+    public function createSession($order, $items, $address = null, $phone = null)
     {
         $orderEncoded = "{";
         !isset($order[ 'amount' ])        ?: $orderEncoded  .= "amount: ${order[ 'amount' ]} ";
@@ -59,7 +62,6 @@ class MercuryClient
             !isset($item[ 'amount' ])        ?: $itemsEncoded  .= "amount: ${item[ 'amount' ]} ";
             !isset($item[ 'price' ])         ?: $itemsEncoded  .= "price: ${item[ 'price' ]} ";
             !isset($item[ 'name' ])          ?: $itemsEncoded  .= "name: \"${item[ 'name' ]}\" ";
-            !isset($item[ 'category' ])      ?: $itemsEncoded  .= "category: \"${item[ 'category' ]}\" ";
             !isset($item[ 'quantity' ])      ?: $itemsEncoded  .= "quantity: ${item[ 'quantity' ]} ";
             !isset($item[ 'quantity_unit' ]) ?: $itemsEncoded  .= "quantity_unit: \"${item[ 'quantity_unit' ]}\" ";
             !isset($item[ 'reference' ])     ?: $itemsEncoded  .= "reference: \"${item[ 'reference' ]}\" ";
@@ -67,7 +69,18 @@ class MercuryClient
         }
         $itemsEncoded .= "]";
 
-        $mutation = "mutation { response: createSession(order: ${orderEncoded}, product: ${itemsEncoded}){id, token}}";
+        $mutation = "mutation {
+          token: openSession(
+            input: {
+              order: ${orderEncoded},
+              product: ${itemsEncoded} ";
+        if (!is_null($address) && $address !== '') {
+            $mutation .= ", customerAddress: ${address} ";
+        }
+        if (!is_null($phone) && $phone !== '') {
+            $mutation .= ", customerPhone: ${phone}";
+        }
+        $mutation .= "})}";
 
         return $this->client->query($mutation);
     }
@@ -113,7 +126,6 @@ class CurlClient
 
         $response = new Response(curl_exec($curl));
         curl_close($curl);
-
         return $response;
     }
 }
@@ -139,7 +151,12 @@ class Response
         if ($response === false) {
             $this->error = true;
         } else {
-            $this->data = $response;
+            $data = json_decode($response, true);
+            if (!isset($data[ 'data' ][ 'token' ])) {
+                $this->error = true;
+            } else {
+                $this->data = $data;
+            }
         }
     }
 
@@ -158,6 +175,6 @@ class Response
      */
     public function getData()
     {
-        return json_decode($this->data, true);
+        return $this->data;
     }
 }
