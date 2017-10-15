@@ -177,4 +177,12 @@ class Response
     {
         return $this->data;
     }
+
+    /**
+     * @return token
+     */
+    public function getToken()
+    {
+        return $this->getData()[ 'data' ][ 'token' ];
+    }
 }

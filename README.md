@@ -49,8 +49,8 @@ $response = $client->createSession($order, $items);
 ```php
 
 if (!$response->isError()) {
-   $token   = $response->getData()[ 'data' ][ 'token' ];
+   $token   = $response->getToken;
 }
 ```
 
-См. описание запроса с определением списка обязательных и опциональных полей https://gql.mercurypos.online/docs/index.html (Mutation.openSession)
+См. описание запроса с определением списка обязательных и опциональных полей https://gql.mercurypos.online/docs/sessioninput.doc.html
