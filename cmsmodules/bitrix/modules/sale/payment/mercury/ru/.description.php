@@ -15,14 +15,8 @@ $MESS['CORE_API_URL'] = 'Адрес API меркурия';
 $MESS['CORE_API_URL_DESC'] = 'Описание <b>http://merchant.mercurypos.ru</b>';
 $MESS['SALE_ORDER_ID'] = 'ID Заказа';
 $MESS['SALE_DESC_ORDER_ID'] = 'Описание ордера';
-$MESS['SALE_SUCCESS_URL'] = 'Страница перевода в магазин в случае успеха';
-$MESS['SALE_DESC_SUCCESS_URL'] = 'Описание страницы перехода в случае успеха';
-$MESS['SALE_FAIL_URL'] = 'Страница плохого результата';
-$MESS['SALE_DESC_FAIL_URL'] = 'Описание страниц плохого результата';
-$MESS['SALE_PAY_BUTTON'] = 'Кнопка';
+
 $MESS['SALE_DESC_PAY_BUTTON'] = null;
-$MESS['PAY_BUTTON_ERROR'] = 'Кнопка ошибки';
-$MESS['PAY_BUTTON_ERROR_DESC'] = null;
 
 $autoFill = 'АВТОФИЛ';
 $MESS['USER_FIRST_NAME'] = 'Имя клиента';

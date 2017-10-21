@@ -23,16 +23,17 @@ class MercuryClient
      */
     private $client;
 
-    const ENDPOINT_URL = 'https://gql.mercurypos.online/gql';
+    //TODO для тестов
+    //const ENDPOINT_URL = 'https://gql.mercurypos.online/gql';
 
     /**
      * MercuryClient constructor.
      *
      * @param string $token JWT token.
      */
-    public function __construct($token)
+    public function __construct($url, $token)
     {
-        $this->url     = self::ENDPOINT_URL;
+        $this->url     = $url;
         $this->token   = $token;
         $this->client = new CurlClient($this->url, $token);
     }

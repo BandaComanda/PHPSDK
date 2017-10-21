@@ -18,12 +18,15 @@ if (!$arOrder) die('44');
 CSalePaySystemAction::InitParamArrays($arOrder);
 
 
-CSaleOrder::PayOrder($arOrder["ID"], "Y");
+if (CSaleOrder::PayOrder($arOrder["ID"], "Y"))
+{
+    echo 'ok';
 
-
-
-
-echo 'ok';
+}
+else
+{
+    echo ('not ok - error Pay check');
+}
 
 
 /*

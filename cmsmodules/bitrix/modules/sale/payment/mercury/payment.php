@@ -3,9 +3,8 @@
 
 require(dirname(__FILE__) . '/MercuryClient.php');
 
-$url = 'https://mercurypos.online/order/';
 
-//$url    = CSalePaySystemAction::GetParamValue('CORE_API_URL');
+$url    = CSalePaySystemAction::GetParamValue('CORE_API_URL');
 
 $token  = CSalePaySystemAction::GetParamValue('STORE_PRIVATE_KEY');
 $client = new MercuryClient($token);
