@@ -5,6 +5,7 @@
 В зависимости от того в какой кодировке работает BItrix Необходимо сказать Платежный модуль:
 
 UTF-8 - [ссылка для скачивания](https://github.com/BandaComanda/PHPSDK/blob/master/cmsmodules/bitrix-utf8.tar.gz)
+Windows-1251 - [ссылка для скачивания](https://github.com/BandaComanda/PHPSDK/blob/master/cmsmodules/bitrix-cp1251.tar.gz)
 
 Архив необходимо разархивировать в Корневую директороию интернет магазина. 
 
