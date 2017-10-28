@@ -35,7 +35,8 @@ class MercuryClient
     {
         $this->url     = $url;
         $this->token   = $token;
-        $this->client = new CurlClient($this->url, $token);
+        $this->client = new CurlClient($this->url, $this->token);
+
     }
 
 
@@ -53,7 +54,7 @@ class MercuryClient
         !isset($order[ 'amount' ])        ?: $orderEncoded  .= "amount: ${order[ 'amount' ]} ";
         !isset($order[ 'currency' ])      ?: $orderEncoded  .= "currency: \"${order[ 'currency' ]}\" ";
         !isset($order[ 'reference' ])     ?: $orderEncoded  .= "reference: \"${order[ 'reference' ]}\" ";
-        !isset($order[ 'tax_amount' ])    ?: $orderEncoded  .= "tax_amount: ${order[ 'tax_amount' ]}";
+        !isset($order[ 'tax_amount' ])    ?: $orderEncoded  .= "taxAmount: ${order[ 'tax_amount' ]}";
         $orderEncoded .= "}";
 
         $itemsEncoded = "[";
@@ -64,7 +65,7 @@ class MercuryClient
             !isset($item[ 'price' ])         ?: $itemsEncoded  .= "price: ${item[ 'price' ]} ";
             !isset($item[ 'name' ])          ?: $itemsEncoded  .= "name: \"${item[ 'name' ]}\" ";
             !isset($item[ 'quantity' ])      ?: $itemsEncoded  .= "quantity: ${item[ 'quantity' ]} ";
-            !isset($item[ 'quantity_unit' ]) ?: $itemsEncoded  .= "quantity_unit: \"${item[ 'quantity_unit' ]}\" ";
+            !isset($item[ 'quantity_unit' ]) ?: $itemsEncoded  .= "quantityUnit: \"${item[ 'quantity_unit' ]}\" ";
             !isset($item[ 'reference' ])     ?: $itemsEncoded  .= "reference: \"${item[ 'reference' ]}\" ";
             $itemsEncoded .= "}";
         }
@@ -82,7 +83,6 @@ class MercuryClient
             $mutation .= ", customerPhone: ${phone}";
         }
         $mutation .= "})}";
-
         return $this->client->query($mutation);
     }
 
@@ -124,7 +124,6 @@ class CurlClient
         curl_setopt($curl, CURLOPT_POSTFIELDS, $query);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, [ "Authorization: Bearer ${token}" ]);
-
         $response = new Response(curl_exec($curl));
         curl_close($curl);
         return $response;
@@ -149,6 +148,8 @@ class Response
      */
     public function __construct($response)
     {
+
+
         if ($response === false) {
             $this->error = true;
         } else {

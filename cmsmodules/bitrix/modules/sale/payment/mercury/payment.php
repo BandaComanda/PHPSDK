@@ -7,7 +7,8 @@ require(dirname(__FILE__) . '/MercuryClient.php');
 $url    = CSalePaySystemAction::GetParamValue('CORE_API_URL');
 
 $token  = CSalePaySystemAction::GetParamValue('STORE_PRIVATE_KEY');
-$client = new MercuryClient($token);
+
+$client = new MercuryClient($url, $token);
 
 $order_id = strlen(CSalePaySystemAction::GetParamValue('ORDER_ID')) > 0 ? CSalePaySystemAction::GetParamValue('ORDER_ID') : $GLOBALS['SALE_INPUT_PARAMS']['ORDER']['ID'];
 
@@ -53,11 +54,10 @@ array_push($items, [
 }
 
 $response = $client->createSession($order, $items);
-print_r($response);
 
 if (!$response->isError()) {
 
-   $token   = $response->getData()[ 'data' ][ 'response' ][ 'token' ];
+   $token   = $response->getToken();
    $session = $response->getData()[ 'data' ][ 'response' ][ 'id' ];
 
 }
@@ -66,6 +66,7 @@ echo ("Что то пошло не так. С вами свяжется мене
 echo ($response->isError());
 
 }
+
 
 ?>
 
