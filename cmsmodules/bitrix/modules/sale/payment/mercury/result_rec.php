@@ -12,7 +12,7 @@ $orderId = (int)$request->get("reference");
 include(GetLangFileName(dirname(__FILE__) . "/", "/result_rec.php"));
 
 $arOrder = CSaleOrder::GetByID($orderId);
-if (!$arOrder) die('44');
+if (!$arOrder) die('Договор не найден - код ошибки 44');
 
 
 CSalePaySystemAction::InitParamArrays($arOrder);
