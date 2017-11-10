@@ -4,39 +4,52 @@ use Bitrix\Main\Application;
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") die('41');
 
-$context = Application::getInstance()->getContext();
+/*$context = Application::getInstance()->getContext();
 $request = $context->getRequest();
-$orderId = (int)$request->get("reference");
+$orderId = $request->getPostList();*/
+
+$mercury_request = json_decode($_POST['data']);
+
+$token  = CSalePaySystemAction::GetParamValue('STORE_PRIVATE_KEY');
 
 
-include(GetLangFileName(dirname(__FILE__) . "/", "/result_rec.php"));
-
-$arOrder = CSaleOrder::GetByID($orderId);
-if (!$arOrder) die('Договор не найден - код ошибки 44');
-
-
-CSalePaySystemAction::InitParamArrays($arOrder);
-
-
-if (CSaleOrder::PayOrder($arOrder["ID"], "Y"))
+if (sha1($token) == $mercury_request->secret)
 {
-    echo 'ok';
+    $arOrder = CSaleOrder::GetByID($mercury_request->reference);
+    if (!$arOrder) die('Договор не найден - код ошибки 44');
+
+    CSalePaySystemAction::InitParamArrays($arOrder);
+
+    if ($mercury_request->status == true)
+    {
+        if (CSaleOrder::PayOrder($arOrder["ID"], "Y"))
+        {
+            echo 'ok payment accept order is '. $mercury_request->mid;
+
+        }
+        else
+        {
+            echo ('not ok - error Pay check');
+        }
+    }
+    else {
+        if (CSaleOrder::PayOrder($arOrder["ID"], "N"))
+        {
+            echo 'ok payment cancel order is '. $mercury_request->mid;
+
+        }
+        else
+        {
+            echo ('not ok - error cancel Pay check');
+        }
+
+    }
 
 }
+
 else
 {
-    echo ('not ok - error Pay check');
+    echo ("error 405");
 }
 
 
-/*
- *
- * {
-"secret": "aaa.bbb.ccc",
-"amount": 8750.40,
-"currency": "RUB",
-"reference": "ID in the Merchant's DB",
-"mid": "ID in the Mercury's DB"
-}
-
- * */

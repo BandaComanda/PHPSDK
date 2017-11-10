@@ -16,14 +16,8 @@ $MESS['CORE_API_URL_DESC'] = 'Описание <b>http://merchant.mercurypos.ru<
 $MESS['SALE_ORDER_ID'] = 'ID Заказа';
 $MESS['SALE_DESC_ORDER_ID'] = 'Описание ордера';
 
-$MESS['SALE_DESC_PAY_BUTTON'] = null;
+$MESS['ADDRESS'] = 'Адрес доставки';
+$MESS['ADDRESS_DESC'] = 'Необходимо заполнять адресом доставки';
+$MESS['PHONE'] = 'Телефон покупателя';
+$MESS['PHONE_DESC'] = 'Контактный номер покупателя';
 
-$autoFill = 'АВТОФИЛ';
-$MESS['USER_FIRST_NAME'] = 'Имя клиента';
-$MESS['USER_FIRST_NAME_DESC'] = $autoFill;
-$MESS['USER_LAST_NAME'] = 'Фамилия';
-$MESS['USER_LAST_NAME_DESC'] = $autoFill;
-$MESS['USER_PATRONYMIC'] = 'Отчество';
-$MESS['USER_PATRONYMIC_DESC'] = $autoFill;
-$MESS['SALE_EMAIL'] = 'EMail клиента';
-$MESS['SALE_DESC_EMAIL'] = $autoFill;

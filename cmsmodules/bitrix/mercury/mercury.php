@@ -5,7 +5,7 @@ $APPLICATION->IncludeComponent(
     "bitrix:sale.order.payment.receive",
     "",
     Array(
-        "PAY_SYSTEM_ID" => "ID PAYMENT SYSTEM IN BITRIX",
+        "PAY_SYSTEM_ID" => "7",
         "PERSON_TYPE_ID" => "1"
     )
 );

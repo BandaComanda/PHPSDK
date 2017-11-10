@@ -3,7 +3,7 @@ use Bitrix\Main\Application;
 
 include(GetLangFileName(dirname(__FILE__) . "/", "/.description.php"));
 
-$psTitle = "Mercury - Istallment Payment System";
+$psTitle = "Mercury Pay - сервис рассрочки покупок";
 $psDescription = "<a href=\"http://www.mercurypos.ru\" target=\"_blank\">http://www.mercurypos.ru</a>";
 $host = Application::getInstance()->getContext()->getServer()->getHttpHost();
 
@@ -37,5 +37,19 @@ $arPSCorrespondence = array(
         "DESCR" => GetMessage("SALE_DESC_ORDER_ID"),
         "VALUE" => "ID",
         "TYPE" => "ORDER"
+    ),
+    "ADDRESS" => array(
+        "NAME" => GetMessage("ADDRESS"),
+        "DESCR" => GetMessage("ADDRESS_DESC"),
+        "VALUE" => "",
+        "TYPE" => ""
+    ),
+    "PHONE" => array(
+        "NAME" => GetMessage("PHONE"),
+        "DESCR" => GetMessage("PHONE_DESC"),
+        "VALUE" => "",
+        "TYPE" => ""
     )
+
+
 );
