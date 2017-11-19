@@ -53,7 +53,7 @@ array_push($items, [
   'amount'        => $item['PRICE']*$item['QUANTITY']]);
 }
 
-$response = $client->createSession($order, $items,  CSalePaySystemAction::GetParamValue('ADDRESS'), CSalePaySystemAction::GetParamValue('PHONE'));
+$response = $client->createSession($order, $items,  CSalePaySystemAction::GetParamValue('PHONE'), CSalePaySystemAction::GetParamValue('ADDRESS'));
 
 if (!$response->isError()) {
 

@@ -21,3 +21,13 @@ $MESS['ADDRESS_DESC'] = 'Необходимо заполнять адресом 
 $MESS['PHONE'] = 'Телефон покупателя';
 $MESS['PHONE_DESC'] = 'Контактный номер покупателя';
 
+$MESS['customerMiddleName'] = 'Отчество';
+$MESS['customerMiddleName_DESC'] = 'Необзательное поле с отчеством';
+$MESS['customerFirstName'] = 'Имя покупателя';
+$MESS['customerFirstName_DESC'] = 'Имя покупателя из заказа';
+$MESS['customerLastName'] = 'Фамилия покупателя';
+$MESS['customerLastName_DESC'] = 'Фамилия покупателя из заказа';
+$MESS['customerEmail'] = 'Email покупателя';
+$MESS['customerEmail_DESC'] = 'Email который оставил покупатель';
+
+

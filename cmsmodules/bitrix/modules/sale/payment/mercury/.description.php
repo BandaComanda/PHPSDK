@@ -49,7 +49,31 @@ $arPSCorrespondence = array(
         "DESCR" => GetMessage("PHONE_DESC"),
         "VALUE" => "",
         "TYPE" => ""
-    )
+    ),
+    "customerMiddleName" => array(
+        "NAME" => GetMessage("customerMiddleName"),
+        "DESCR" => GetMessage("customerMiddleName_DESC"),
+        "VALUE" => "",
+        "TYPE" => ""
+    ),
+    "customerFirstName" => array(
+        "NAME" => GetMessage("customerFirstName"),
+        "DESCR" => GetMessage("customerFirstName_DESC"),
+        "VALUE" => "",
+        "TYPE" => ""
+    ),
+     "customerLastName" => array(
+        "NAME" => GetMessage("customerLastName"),
+        "DESCR" => GetMessage("customerLastName_DESC"),
+        "VALUE" => "",
+        "TYPE" => ""
+    ),
+     "customerEmail" => array(
+        "NAME" => GetMessage("customerEmail"),
+        "DESCR" => GetMessage("customerEmail_DESC"),
+        "VALUE" => "",
+        "TYPE" => ""
+    ),
 
 
 );

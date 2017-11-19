@@ -43,12 +43,15 @@ class MercuryClient
     /**
      * @param array $order
      * @param array $items
-     * @param string $address
      * @param string $phone
-     *
+     * @param string $address
+     * @param string $customerFirstName
+     * @param string $customerMiddleName
+     * @param string $customerLastName
+     * @param string $customerEmail
      * @return Response
      */
-    public function createSession($order, $items, $address = null, $phone = null)
+    public function createSession($order, $items, $phone = null,  $address = null, $customerFirstName = null, $customerMiddleName = null, $customerLastName = null, $customerEmail = null)
     {
         $orderEncoded = "{";
         !isset($order[ 'amount' ])        ?: $orderEncoded  .= "amount: ${order[ 'amount' ]} ";
@@ -82,6 +85,22 @@ class MercuryClient
         if (!is_null($phone) && $phone !== '') {
             $mutation .= ", customerPhone: ${phone}";
         }
+
+        if(!is_null($customerFirstName) && $customerFirstName !==''){
+            $mutation .= ", customerFirstName: ${customerFirstName}";
+        }
+        if(!is_null($customerMiddleName) && $customerMiddleName !==''){
+            $mutation .= ", customerMiddleName: ${customerMiddleName}";
+        }
+        if(!is_null($customerLastName) && $customerLastName !==''){
+            $mutation .= ", customerLastName: ${customerLastName}";
+        }
+        if(!is_null($customerEmail) && $customerEmail !==''){
+            $mutation .= ", customerEmail: ${customerEmail}";
+        }
+
+
+
         $mutation .= "})}";
         return $this->client->query($mutation);
     }
