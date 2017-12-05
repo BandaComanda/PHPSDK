@@ -79,29 +79,30 @@ class MercuryClient
             input: {
               order: ${orderEncoded},
               product: ${itemsEncoded} ";
+
         if (!is_null($address) && $address !== '') {
-            $mutation .= ", customerAddress: ${address} ";
+            $mutation .= ", customerAddress: \"${address}\" ";
         }
         if (!is_null($phone) && $phone !== '') {
-            $mutation .= ", customerPhone: ${phone}";
+            $mutation .= ", customerPhone: \"${phone}\"";
         }
 
         if(!is_null($customerFirstName) && $customerFirstName !==''){
-            $mutation .= ", customerFirstName: ${customerFirstName}";
+            $mutation .= ", customerFirstName: \"${customerFirstName}\"";
         }
         if(!is_null($customerMiddleName) && $customerMiddleName !==''){
-            $mutation .= ", customerMiddleName: ${customerMiddleName}";
+            $mutation .= ", customerMiddleName: \"${customerMiddleName}\"";
         }
         if(!is_null($customerLastName) && $customerLastName !==''){
-            $mutation .= ", customerLastName: ${customerLastName}";
+            $mutation .= ", customerLastName: \"${customerLastName}\"";
         }
         if(!is_null($customerEmail) && $customerEmail !==''){
-            $mutation .= ", customerEmail: ${customerEmail}";
+            $mutation .= ", customerEmail: \"${customerEmail}\"";
         }
-
 
 
         $mutation .= "})}";
+
         return $this->client->query($mutation);
     }
 

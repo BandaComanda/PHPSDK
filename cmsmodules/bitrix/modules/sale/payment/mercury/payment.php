@@ -53,18 +53,21 @@ array_push($items, [
   'amount'        => $item['PRICE']*$item['QUANTITY']]);
 }
 
-$response = $client->createSession($order, $items,  CSalePaySystemAction::GetParamValue('PHONE'), CSalePaySystemAction::GetParamValue('ADDRESS'));
+
+$response = $client->createSession($order, $items,  CSalePaySystemAction::GetParamValue('PHONE'), CSalePaySystemAction::GetParamValue('ADDRESS'), CSalePaySystemAction::GetParamValue('customerFirstName'), CSalePaySystemAction::GetParamValue('customerMiddleName'), CSalePaySystemAction::GetParamValue('customerLastName'), CSalePaySystemAction::GetParamValue('customerEmail'));
+
 
 if (!$response->isError()) {
 
    $token   = $response->getToken();
    $session = $response->getData()[ 'data' ][ 'response' ][ 'id' ];
 
+
 }
 else {
 echo ("Что то пошло не так. С вами свяжется менеджер магазина. Код ошибки: ");
 echo ($response->isError());
-
+    die ("Не удалось отправить заказ в Mercury");
 }
 
 
