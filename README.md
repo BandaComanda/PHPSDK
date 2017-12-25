@@ -55,9 +55,9 @@ if (!$response->isError()) {
 ```
 Отображение Виджета для оплаты происходит с использоваение полученного $token в обхекте Response. 
 Для отображения токена на странице необходимо: 
-На странице инплементировать JS скрипт Mercury:
+На странице инплементировать JS скрипт Mercury (Для Demo среды):
 ```javascript
-<script language="javascript" src="/mercury/mercury.js" ></script>
+<script src="//widget.demo.mercurypos.ru/mercury.js" charset="utf-8" type="text/javascript"></script>
 
 ```
 На странице разместить DIV с id = mercury
