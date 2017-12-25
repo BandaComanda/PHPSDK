@@ -45,6 +45,7 @@ $items = [
 $response = $client->createSession($order, $items);
 ```
 
+
 4. В случае успеха - объект Response будет содержать токен для инициализации виджета, который можно извлечь следующим образом:
 ```php
 
@@ -52,6 +53,31 @@ if (!$response->isError()) {
    $token   = $response->getToken;
 }
 ```
+Отображение Виджета для оплаты происходит с использоваение полученного $token в обхекте Response. 
+Для отображения токена на странице необходимо: 
+На странице инплементировать JS скрипт Mercury:
+```javascript
+<script language="javascript" src="/mercury/mercury.js" ></script>
+
+```
+На странице разместить DIV с id = mercury
+```html
+<div id="mercury"></div>
+```
+
+И с использованием $token отобразить виджет: 
+
+```javascript
+<script language="javascript">
+
+Mercury.init({token: "<?echo $token;?>", onClose: function(id){
+var frame = document.getElementById(id);
+frame.parentNode.removeChild(frame);
+}});
+```
+
+
+
 5. Обратный визов магазина (call back) осуществляется по URL который был передан в Mercury На этапе подключения пагазина. По изменению статуса заказа в системе Mercury 
 будет произведен POST вызов:
 Metod: POST
