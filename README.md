@@ -52,5 +52,29 @@ if (!$response->isError()) {
    $token   = $response->getToken;
 }
 ```
+5. Обратный визов магазина (call back) осуществляется по URL который был передан в Mercury На этапе подключения пагазина. По изменению статуса заказа в системе Mercury 
+будет произведен POST вызов:
+Metod: POST
+В теле запроса:
+```php
+"data" =>  {"secret":"20aec49a150a0a2d30a982ce015397a1a8ff3a49",
+            "amount":"1579.10",
+            "currency":"RUB",
+            "reference":"75",
+            "mid":"32f5fdb7-753e-4e08-9574-0f8bdb8bf34e",
+            "status":true}
+ ```
+Где 
+secret - sha1($token)
+
+ammount - сумма заказа 
+
+currency - валюта
+
+reference - ID заказа в магазина (значение которое было передано в запросе От магазина, в $order)
+
+mid - id заказа в Mercury
+
+status - TRUE - рассрочка предоставлена, false - рассрочка не предоставлена.
 
 См. описание запроса с определением списка обязательных и опциональных полей https://gql.mercurypos.online/docs/sessioninput.doc.html
